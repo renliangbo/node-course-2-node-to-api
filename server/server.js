@@ -1,31 +1,15 @@
-const mongoose = require('mongoose');
+const express = require('express');
+const bodyParser = require('body-parser');
 
-const {Schema} = mongoose;
-const TodoSchema = new Schema({
-		text: {
-				type: String,
-				required: true,
-				minlength: 1,
-				trim: true
-		},
-		completed: {
-				type: Boolean,
-				default: false
-		},
-		completedAt: {
-				type: Number,
-				default: null
-		}
-})
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/TodoApp');
+var {Todo} = require('./models/todo');
+var {User} = require('./models/user');
 
-const Todo = mongoose.model('Todo', TodoSchema);
-var newTodo = new Todo({text: ' Edit this video  upfeuf    '});
-newTodo
-		.save()
-		.then((todo) => {
-				console.log(todo)
-		}, (err) => {
-				console.log(err)
-		})
+var app = express();
+
+app.listen(3000, () => {
+		console.log('Started on port 3000')
+});
+
+// var newTodo = new Todo({text: ' Edit this video  upfeuf    '}); newTodo
+// 		.save() 		.then((todo) => { 				console.log(todo) 		}, (err) => {
+// 				console.log(err) 		})
