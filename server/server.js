@@ -88,20 +88,19 @@ app.delete('/todos/:id', (req, res) => {
 
 app.patch('/todos/:id', (req, res) => {
 		var {id} = req.params;
-		var body = _.pick(req.body, ['text,completed']);
-
+		var body = _.pick(req.body, ['text', 'completed']);
 		if (!ObjectID.isValid(id)) {
 				return res
 						.status(404)
-						.send('id is invalid')
+						.send('id isinvalid ')
 		};
-
-		if (_.isBoolean(body.completed && body.completed)) {
+		if (_.isBoolean(body.completed) && body.completed) {
 				body.completedAt = new Date().getTime();
 		} else {
 				body.completed = false;
 				body.completedAt = null;
 		};
+
 		Todo.findByIdAndUpdate(id, {
 				$set: body
 		}, {new: true}).then((todo) => {
@@ -119,7 +118,7 @@ app.patch('/todos/:id', (req, res) => {
 						.send(400)
 		})
 
-})
+});
 
 app.listen(port, () => {
 		console.log(`Started on port${port}`)
