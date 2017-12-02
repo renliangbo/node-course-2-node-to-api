@@ -111,7 +111,7 @@ app.patch('/todos/:id', (req, res) => {
 				};
 				res
 						.status(200)
-						.send(todo)
+						.send({todo})
 		}).catch((err) => {
 				res
 						.status(400)
