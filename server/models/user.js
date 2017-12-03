@@ -1,3 +1,5 @@
+import {race} from '../../../../../.cache/typescript/2.6/node_modules/@types/async';
+
 const {mongoose} = require('../db/mongoose');
 const validator = require('validator');
 const jwt = require('jsonwebtoken');
@@ -61,6 +63,21 @@ UserSchema.methods.generateAutoToken = function () {
 				.then(() => {
 						return token
 				})
+};
+
+UserSchema.statics.findByToken = function (token) {
+		var User = this;
+		var decoded;
+		try {
+				decoded = jwt.verify(token, 'abc123');
+				console.log(decoded)
+		} catch (err) {
+				//console.log(err)
+				return new Promise((resolve, reject) => {
+						reject()
+				})
+		};
+		return User.findOne({'_id': decoded._id, 'tokens.token': token, 'tokens.access': 'auth'})
 }
 
 const User = mongoose.model('User', UserSchema);

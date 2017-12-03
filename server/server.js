@@ -123,11 +123,11 @@ app.patch('/todos/:id', (req, res) => {
 
 app.post('/users', (req, res) => {
 		var body = _.pick(req.body, ['email', 'password']);
-		var user = User(body);
+		var user = new User(body);
 		user
 				.save()
 				.then(() => {
-						return user.generateAutoToken()
+						return user.generateAutoToken();
 				})
 				.then((token) => {
 						res
@@ -139,6 +139,16 @@ app.post('/users', (req, res) => {
 								.status(400)
 								.send(err)
 				})
+});
+
+app.get('/users/me', (req, res) => {
+		var token = req.header('x-auth');
+		User
+				.findByToken(token)
+				.then((user) => {
+						if (!user) {};
+						res.send(user);
+				});
 })
 app.listen(port, () => {
 		console.log(`Started on port${port}`)
