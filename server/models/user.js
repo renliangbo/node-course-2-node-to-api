@@ -1,5 +1,3 @@
-import {race} from '../../../../../.cache/typescript/2.6/node_modules/@types/async';
-
 const {mongoose} = require('../db/mongoose');
 const validator = require('validator');
 const jwt = require('jsonwebtoken');
