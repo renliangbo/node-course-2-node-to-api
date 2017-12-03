@@ -126,8 +126,13 @@ app.post('/users', (req, res) => {
 		var user = User(body);
 		user
 				.save()
-				.then((user) => {
-						res.send(user)
+				.then(() => {
+						return user.generateAutoToken()
+				})
+				.then((token) => {
+						res
+								.header('x-auth', token)
+								.send(user)
 				})
 				.catch((err) => {
 						res
