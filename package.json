@@ -21,7 +21,8 @@
     "mocha": "^3.0.2",
     "mongodb": "^2.2.33",
     "mongoose": "^4.13.5",
-    "supertest": "^3.0.0"
+    "supertest": "^3.0.0",
+    "validator": "^9.1.2"
   },
   "devDependencies": {
     "nodemon": "^1.12.1"
