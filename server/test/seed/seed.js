@@ -12,6 +12,11 @@ var userOneToken = jwt.sign({
 		access: 'auth'
 }, 'abc123').toString();
 
+var userTwoToken = jwt.sign({
+		_id: userTwoId,
+		access: 'auth'
+}, 'abc123').toString();
+
 const users = [
 		{
 				_id: userOneId,
@@ -26,7 +31,13 @@ const users = [
 		}, {
 				_id: userTwoId,
 				email: 'joe@example.com',
-				password: 'twopassword'
+				password: 'twopassword',
+				tokens: [
+						{
+								access: 'auth',
+								token: userTwoToken
+						}
+				]
 		}
 ]
 const todos = [
