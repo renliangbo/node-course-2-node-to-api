@@ -15,8 +15,8 @@ const port = process.env.PORT
 
 app.use(bodyParser.json());
 
-app.post('/todos', (req, res) => {
-		let todo = new Todo({text: req.body.text});
+app.post('/todos', authenticate, (req, res) => {
+		let todo = new Todo({text: req.body.text, _creator: req.user._id});
 
 		todo
 				.save()
@@ -29,9 +29,9 @@ app.post('/todos', (req, res) => {
 				})
 });
 
-app.get('/todos', (req, res) => {
+app.get('/todos', authenticate, (req, res) => {
 		Todo
-				.find({})
+				.find({_creator: req.user._id})
 				.then((todos) => {
 						res.send({todos})
 				}, (err) => {

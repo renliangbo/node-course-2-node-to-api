@@ -32,12 +32,14 @@ const users = [
 const todos = [
 		{
 				_id: new ObjectID(),
-				text: 'Walk dog'
+				text: 'Walk dog',
+				_creator: userOneId
 		}, {
 				_id: new ObjectID(),
 				completed: true,
 				completedAt: 222,
-				text: 'Charge my phone'
+				text: 'Charge my phone',
+				_creator: userTwoId
 		}
 ];
 const populateTodos = (done) => {
