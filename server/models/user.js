@@ -27,11 +27,11 @@ const UserSchema = new Schema({
 				{
 						access: {
 								type: String,
-								required: true
+								//required: true
 						},
 						token: {
 								type: String,
-								required: true
+								//required: true
 						}
 				}
 		]
@@ -69,12 +69,9 @@ UserSchema.statics.findByToken = function (token) {
 		var decoded;
 		try {
 				decoded = jwt.verify(token, 'abc123');
-				console.log(decoded)
 		} catch (err) {
-				//console.log(err)
-				return new Promise((resolve, reject) => {
-						reject()
-				})
+
+				return Promise.reject();
 		};
 		return User.findOne({'_id': decoded._id, 'tokens.token': token, 'tokens.access': 'auth'})
 };

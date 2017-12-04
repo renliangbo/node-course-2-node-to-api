@@ -1,7 +1,7 @@
 var {User} = require('../models/user');
 
 var authenticate = (req, res, next) => {
-		var token = req.header('x-auth');
+		var token = req.header('x-auth') || 'qq';
 		User
 				.findByToken(token)
 				.then((user) => {
@@ -12,13 +12,14 @@ var authenticate = (req, res, next) => {
 						req.token = token;
 						next();
 						//res.send(user);
-				}, (user) => {})
+				})
 				.catch((e) => {
 						res
 								.status(401)
 								.send();
 				})
 };
+
 module.exports = {
 		authenticate
 }
