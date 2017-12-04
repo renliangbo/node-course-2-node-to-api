@@ -10,12 +10,12 @@ var userTwoId = new ObjectID();
 var userOneToken = jwt.sign({
 		_id: userOneId,
 		access: 'auth'
-}, 'abc123').toString();
+}, process.env.JWT_SECRET).toString();
 
 var userTwoToken = jwt.sign({
 		_id: userTwoId,
 		access: 'auth'
-}, 'abc123').toString();
+}, process.env.JWT_SECRET).toString();
 
 const users = [
 		{
